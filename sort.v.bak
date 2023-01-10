@@ -1,0 +1,46 @@
+`timescale 1ns / 1ps
+module sort;
+
+	// Inputs
+	reg clock;
+	reg rst;
+	reg start;
+	reg enable;
+	reg [3:0] key;
+	reg [3:0] dig;
+	reg [7:0] seg;
+	// Instantiate the Unit Under Test (UUT)
+	top uut (
+		.clk(clock), 
+		.rst(rst),
+		.key(key)
+	);
+	
+	always #1 clock = ~clock;
+	always #100 key = ~key;
+	initial begin
+		// Initialize Inputs
+		clock = 0;
+		key = 4'b1111;
+		// rst = 1;
+		// start = 0;
+		// enable = 0;
+
+		// // Wait 50 ns for global reset to finish
+		// #50
+		// enable <= 1;
+		// start <= 0;
+		// rst=0;
+		#50 rst = 1;
+		#50 rst = 0;
+		#50 rst = 1;
+		
+		// #50 rst=1;
+		// #50 enable = 1;
+		// #50 start = 1;
+		// #50 start = 0; 
+
+	end
+      
+endmodule
+

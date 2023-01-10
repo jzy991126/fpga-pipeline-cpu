@@ -1,0 +1,21 @@
+
+
+`include "define.v"
+
+module JP (
+	input wire [15:0] mem_ir,
+	input wire zf,
+	input wire sf,
+	input wire cf,
+	output wire jump
+    );
+
+assign jump = (
+				   ((mem_ir[15:11] == `JZ ) && (zf == 1'b1))
+				|| ((mem_ir[15:11] == `JNZ) && (zf == 1'b0))
+				|| ((mem_ir[15:11] == `JS ) && (sf == 1'b1))
+				|| ((mem_ir[15:11] == `JNS) && (sf == 1'b0))
+				|| ((mem_ir[15:11] == `JC)  && (cf == 1'b1))
+				|| ((mem_ir[15:11] == `JNC) && (cf == 1'b0))
+			  );
+endmodule
